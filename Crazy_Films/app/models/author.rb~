@@ -1,0 +1,10 @@
+class Author < ActiveRecord::Base
+  #has_and_belongs_to_many :films
+  validates_presence_of :dni, :firstname, :surnames, :birthdate
+  validates_uniqueness_of :dni
+
+
+  def information
+    "#{dni} #{firstname} #{surnames} #{birthdate}"
+  end
+end
