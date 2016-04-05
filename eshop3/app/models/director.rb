@@ -1,7 +1,7 @@
 class Director < ActiveRecord::Base
-  #has_and_belongs_to_many :films
-  validates_presence_of :first_name, :last_name
-  validates_length_of :first_name, :in => 2..255, :last_name, :in => 2..255
+  #validates_presence_of :first_name, :last_name
+  validates :first_name, presence: { message: "Nombre no puede estar vacío" }
+  validates :last_name, presence:{ message: "Apellidos no puede estar vacío" }
 
   def name
     "#{first_name} #{last_name}"

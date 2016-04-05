@@ -1,12 +1,21 @@
 <% if @director.errors.any? %>
+
   <div id="errorExplanation">
+
   <h2><%= pluralize(@director.errors.count, "error", "errores") %> impiden que la entidad se grabe en el sistema:</h2>
+
     <ul>
+
       <% @director.errors.full_messages.each do |msg| %>
+
         <li><%= msg %></li>
+
       <% end %>
+
     </ul>
+
   </div>
+
 <% end %>
 
 <div class="field">

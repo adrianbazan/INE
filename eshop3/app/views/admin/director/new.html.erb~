@@ -1,6 +1,6 @@
 <%= form_tag :action => 'create' do %>   
   <%= render :partial => 'form' %>   
-  <%= submit_tag 'Crear director' %>
+  <%= submit_tag 'Create director' %>
 <% end %>
 
 <%= link_to 'Atrás', :action => 'index' %>
