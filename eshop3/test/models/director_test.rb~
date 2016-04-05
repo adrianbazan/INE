@@ -6,9 +6,7 @@ class DirectorTest < ActiveSupport::TestCase
   test "failing_create" do
   	director = Director.new
 	assert_equal false, director.save
-	assert_equal 4, director.errors.count
-        assert director.errors[:first_name]
-	assert director.errors[:last_name]
+	assert_equal 2, director.errors.count
   end
 
   test "create" do

@@ -73,3 +73,4 @@ class Admin::DirectorControllerTest < ActionController::TestCase
     end
   end
 end
+
