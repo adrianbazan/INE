@@ -39,7 +39,7 @@ class Admin::ProducerControllerTest < ActionController::TestCase
     post :update, :id => 1, :producer => { :name => 'Joseph'}
     assert_response :redirect
     assert_redirected_to :action => 'show', :id => 1
-    assert_equal 'Joseph', Producer.find(1).first_name
+    assert_equal 'Joseph', Producer.find(1).name
   end
 
   test "test_destroy" do

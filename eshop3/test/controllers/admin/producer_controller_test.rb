@@ -21,15 +21,6 @@ class Admin::ProducerControllerTest < ActionController::TestCase
     assert_equal 'Productora Joel correctamente creada.', flash[:notice]
   end
 
-  test "failing_create" do
-    assert_no_difference(Producer, :count) do
-      post :create, :producer => {:name => 'Joel'}
-      assert_response :success
-      assert_template 'admin/producer/new'
-      assert_tag :tag => 'div', :attributes => {:class => 'field_with_errors'}
-    end
-  end
-
   test "edit" do
     get :edit, :id => 1
     assert_tag :tag => 'input', :attributes => { :name => 'producer[name]', :value => 'Joel' }

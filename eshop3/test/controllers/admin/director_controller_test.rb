@@ -21,15 +21,6 @@ class Admin::DirectorControllerTest < ActionController::TestCase
     assert_equal 'Director Joel Spolsky correctamente creado.', flash[:notice]
   end
 
-  test "failing_create" do
-    assert_no_difference(Director, :count) do
-      post :create, :director => {:first_name => 'Joel'}
-      assert_response :success
-      assert_template 'admin/director/new'
-      assert_tag :tag => 'div', :attributes => {:class => 'field_with_errors'}
-    end
-  end
-
   test "edit" do
     get :edit, :id => 1
     assert_tag :tag => 'input', :attributes => { :name => 'director[first_name]', :value => 'Joel' }
