@@ -1,0 +1,74 @@
+require File.dirname(__FILE__) + '/../../test_helper'  
+
+class Admin::ProducerControllerTest < ActionController::TestCase
+  fixtures :producers
+
+  test "new" do
+    get :new  
+    assert_template 'admin/producer/new'  
+    assert_tag 'h1', :content => 'Crear productora'  
+    assert_tag 'form', :attributes => { :action => '/admin/producer/create' }   
+  end  
+
+  test "create" do
+    get :new    
+    assert_template 'admin/producer/new'
+    assert_difference(Producer, :count) do
+      post :create, :producer => {:name => 'Joel'}
+      assert_response :redirect
+      assert_redirected_to :action => 'index'      
+    end
+    assert_equal 'Productora Joel correctamente creada.', flash[:notice]
+  end
+
+  test "failing_create" do
+    assert_no_difference(Producer, :count) do
+      post :create, :producer => {:name => 'Joel'}
+      assert_response :success
+      assert_template 'admin/producer/new'
+      assert_tag :tag => 'div', :attributes => {:class => 'field_with_errors'}
+    end
+  end
+
+  test "edit" do
+    get :edit, :id => 1
+    assert_tag :tag => 'input', :attributes => { :name => 'producer[name]', :value => 'Joel' }
+  end
+
+  test "update" do
+    post :update, :id => 1, :producer => { :name => 'Joseph'}
+    assert_response :redirect
+    assert_redirected_to :action => 'show', :id => 1
+    assert_equal 'Joseph', Producer.find(1).name
+  end
+
+  test "test_destroy" do
+    assert_difference(Producer, :count, -1) do
+      post :destroy, :id => 1
+      assert_equal flash[:notice], 'Productora Joel correctamente eliminada.'
+      assert_response :redirect
+      assert_redirected_to :action => 'index'
+      get :index
+      assert_response :success
+      assert_tag :tag => 'div', :attributes => {:id => 'notice'},
+        :content => 'Productora Joel correctamente eliminada.'
+    end
+  end
+
+  test "show" do
+    get :show, :id => 1
+    assert_template 'admin/producer/show'
+    assert_equal 'Joel', assigns(:producer).name
+    assert_tag "h1", :content => Producer.find(1).name
+  end
+
+  test "index" do
+    get :index
+    assert_response :success
+    assert_tag :tag => 'table', :children => { :count => Producer.count + 1, :only => {:tag => 'tr'} }
+    Producer.find_each do |a|
+      assert_tag :tag => 'td', :content => a.name
+    end
+  end
+end
+

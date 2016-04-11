@@ -1,11 +1,39 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+  get 'producer/new'
+  end
+
+  namespace :admin do
+  get 'producer/create'
+  end
+
+  namespace :admin do
+  get 'producer/edit'
+  end
+
+  namespace :admin do
+  get 'producer/update'
+  end
+
+  namespace :admin do
+  get 'producer/destroy'
+  end
+
+  namespace :admin do
+  get 'producer/show'
+  end
+
+  namespace :admin do
+  get 'producer/index'
+  end
+
   root :to => 'about#index'
 
   get 'about' => 'about#index'
   get 'checkout' => 'checkout#index'
   get 'admin/director' => 'admin/director#index'
-  get 'admin/producer' => 'admin/producer#index'
+  get 'admin/actor' => 'admin/actor#index'
   get 'admin/film' => 'admin/film#index'
   get 'admin/order' => 'admin/order#index'
 
@@ -18,14 +46,14 @@ Rails.application.routes.draw do
   get 'admin/director/show/:id' => 'admin/director#show'
   get 'admin/director/index'
 
-  get 'admin/producer/new'
-  post 'admin/producer/create'
-  get 'admin/producer/edit'
-  post 'admin/producer/update'
-  post 'admin/producer/destroy'
-  get 'admin/producer/show'
-  get 'admin/producer/show/:id' => 'admin/producer#show'
-  get 'admin/producer/index'
+  get 'admin/actor/new'
+  post 'admin/actor/create'
+  get 'admin/actor/edit'
+  post 'admin/actor/update'
+  post 'admin/actor/destroy'
+  get 'admin/actor/show'
+  get 'admin/actor/show/:id' => 'admin/actor#show'
+  get 'admin/actor/index'
 
   get 'admin/film/new'
   post 'admin/film/create'
