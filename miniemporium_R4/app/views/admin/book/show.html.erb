@@ -1,0 +1,28 @@
+<dl>
+  <dt>Title</dt>
+  <dd><%= @book.title %></dd>
+  <dt>Publisher</dt>
+  <dd><%= @book.publisher.name %></dd>
+  <dt>Published at</dt>
+  <dd><%= @book.published_at.strftime("%d/%m/%Y at %I:%M%p") %></dd>
+  <dt>Authors</dt>
+  <dd><%= @book.author_names %></dd>
+  <dt>ISBN</dt>
+  <dd><%= @book.isbn %></dd>
+  <dt>Blurb</dt>
+  <%= RedCloth.new(@book.blurb).to_html.html_safe if @book.blurb %>
+  <dt>Price</dt>
+  <dd><%= @book.price %></dd>
+  <dt>Page count</dt>
+  <dd><%= @book.page_count %></dd>
+  <dt>Cover image</dt>
+  <% if @book.cover_image.exists? then %>
+    <dd><%= image_tag @book.cover_image.url %></dd>
+  <% else %>
+    <dd><%= image_tag '/missing.png' %></dd>
+    <p> There is no cover image attached. Please upload one. </p>
+  <% end %>
+</dl>
+
+<%= link_to 'Edit', :action => 'edit', :id => @book %> |
+<%= link_to 'Back', :action => 'index' %>

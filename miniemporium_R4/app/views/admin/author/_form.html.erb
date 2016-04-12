@@ -1,0 +1,20 @@
+<% if @author.errors.any? %>
+  <div id="errorExplanation">
+  <h2><%= pluralize(@author.errors.count, "error") %> prohibited this author from being saved:</h2>
+    <ul>
+      <% @author.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="field">
+  <p><label for="author_first_name">First name</label><br/>
+  <%= text_field 'author', 'first_name' %></p>
+</div>
+
+<div class="field">
+  <p><label for="author_last_name">Last name</label><br/>
+  <%= text_field 'author', 'last_name' %></p>
+</div>

@@ -1,0 +1,18 @@
+<h2>by <%=@book.author_names %></h2>
+<% if @book.cover_image.exists? then %>
+  <dd><%= image_tag @book.cover_image.url %></dd>
+<% else %>
+  <p>No cover image available.</p>
+<% end %>
+<dl>
+  <dt>Price</dt>
+  <dd><%= sprintf("%0.2f", @book.price) %></dd>
+  <dt>Page count</dt>
+  <dd><%= @book.page_count %></dd>
+  <dt>Pubisher</dt>
+  <dd><%= @book.publisher.name %></dd>
+  <dt>Blurb</dt>
+  <%= RedCloth.new(@book.blurb).to_html.html_safe if @book.blurb %>
+</dl>
+
+<p><%= link_to 'Catalog', :action => 'index' %> </p>

@@ -1,0 +1,61 @@
+<% if @book.errors.any? %>
+  <div id="errorExplanation">
+  <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
+    <ul>
+      <% @book.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="field">
+  <p><label for="book_title">Title</label><br/>
+  <%= text_field 'book', 'title' %></p>
+</div>
+
+<div class="field">
+  <p><label for="book_publisher">Publisher</label><br/>
+  <%= collection_select :book, :publisher_id, @publishers, :id, :name %></p>
+</div>
+  
+<div class="field">
+  <p><label for="book[author_ids][]">Authors</label><br/>
+  <%= select_tag 'book[author_ids][]', options_from_collection_for_select(@authors, :id, :name, 
+      @book.authors.collect{|author| author.id}), { :multiple => true, :size => 5 } %></p>
+</div>
+
+<div class="field"><p>
+  <label for="book_published_at">Published at</label><br/>
+  <%= datetime_select 'book', 'published_at' %></p>
+</div>
+
+<div class="field">
+  <p><label for="book_isbn">Isbn</label><br/>
+  <%= text_field 'book', 'isbn' %></p>
+</div>
+
+<div class="field">
+  <p><label for="book_blurb">Blurb</label><br/>
+  <%= text_area 'book', 'blurb' %></p>
+</div>
+
+<div class="field">
+  <p><label for="book_price">Price</label><br/>
+  <%= text_field 'book', 'price' %></p>
+</div>
+
+<div class="field">
+  <p><label for="book_page_count">Page count</label><br/>
+  <%= text_field 'book', 'page_count' %></p>
+</div>
+
+<div class="field">
+  <% if @book.cover_image.exists? then %>
+    <dd><%= image_tag @book.cover_image.url %></dd>
+  <% else %>
+    <p> There is no cover image attached. Please upload one. </p>
+  <% end %>
+  <p><label for="book_cover_image">Cover image</label><br/>
+  <%= file_field 'book', :cover_image %></p>
+</div>
