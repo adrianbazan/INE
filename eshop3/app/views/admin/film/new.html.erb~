@@ -1,0 +1,6 @@
+<%= form_tag "/admin/film/create?id=#{@film.id}", :multipart => true do %>
+  <%= render :partial => 'form' %>   
+  <%= submit_tag 'Create film' %>
+<% end %>
+
+<%= link_to 'Atrás', :action => 'index' %>
